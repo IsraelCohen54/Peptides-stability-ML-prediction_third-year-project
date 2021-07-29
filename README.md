@@ -8,15 +8,14 @@ Based on this data, our project was constructing a machine that would learn to a
 
 getting started:
 We decided to start with binary classification of 25% most stable and 25% least stable peptides, see how it goes, and later advance to regression.
-Our initial intention for the binary classification was to start with MLP, get accuracy of around 60%, than move forward to RNN, becuse we assumed the order of AA in the sequenced plays a central role.
+Our initial intention for the binary classification was to start with MLP, get accuracy of around 60%, than move forward to RNN, becuse we assumed the order of AAs in the sequenced plays a central role.
 
 too good MLP results:
 To take into account the order of AA within the sequence, we used one-hot-encoding: there are 20 different AA, so each AA in the peptide is ancoded to vector of 20, and overall peptides of 23 AA encoded to vector of 460.
 To our great surprise, with the simple MLP we hit 91% accuracy *this is mainMLP.py*!
 At first we suspected the results are to good to be true.
-Indeed we noticed our data contains peptides that are very similar to one another, and some even identical (turned out the reasarch got two different results for the same peptides, it happens). Using cd-hit, we filtered the data from peptides that have 85% or more identical AA. The results remained the same, so we reduced it to 75%, and even 40%, with no significant change. We also tried using random half of the data (the data remained after 40% filtering was about half of the original) and got similar results. We concluded the problem we tried to solve - binary classification of 25% most stable and 25% least stable - is too easy, though it's weird that it can be solved with only MLP.
+Indeed we noticed our data contains peptides that are very similar to one another, and some even identical (turned out the reasarch got two different results for the same peptides, it happens). Using cd-hit, we filtered the data from peptides that have 85% or more identical AAs. The results remained the same, so we reduced it to 75%, and even 40%, with no significant change. We also tried using random half of the data (the remaining data after 40% filtering was about half of the original) and got similar results. We concluded the problem we tried to solve - binary classification of 25% most stable and 25% least stable - was too easy, though it's weird that it can be solved with only MLP.
 From now on we continued using the 40% filtered data, just to be sure. *this is the pepsData.xlsx.*
-
 
 simpler models:
 At this point, we had a meeting with Dr. Itay who surprised us by agreeing that the order of AA within the sequence is not important. He showed us an article that stated that.
