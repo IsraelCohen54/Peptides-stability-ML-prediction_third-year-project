@@ -1,4 +1,4 @@
-# FinalProject
+# Third year project
 
 Made with Chananel Hadad (another student) and supervised by prof. Ron Unger.
 
