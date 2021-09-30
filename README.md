@@ -37,5 +37,5 @@ To our regret, we succeeded to link only small portion of the proteins.
 To determine the impact of the tail stability, we Logistic Regression to predict the stability of the protein and used the following encoding: each protein was encoded to vector of 21, the first 20 are regular bag-of-words, and the last component is for the stability of the tail: we made 2 runs. in the first it was always 0, and in the second it was -1 for protein with unstable tail, 1 for stable, and 0 for the rest (preteins with tails of middle 50%, and unknown).
 The results of both runs were the same - accuracy of 80%. but in the second run the 21st component was given a large weight.
 The conclusion is the tail stability does make impact, to some extent, on the stability of the whole protein, but we couldn't see it in the results because the stability of proteins can be predicted well without it, and most of the proteins were on 0 on both runs, because we did not succeed in finding their tail.
-*This is prots_utils.py.  run logisticRegerssion.py, put line 6 in comment, and uncomment line 5*
+*This is prots_utils.py.  run logisticRegerssion.py, change line 6 to comment, and uncomment line 5*
 *The proteins data is protsData.csv*
