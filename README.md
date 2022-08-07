@@ -12,7 +12,7 @@ Our initial intention for the binary classification was to start with MLP, get a
 
 Too good MLP results:
 To consider the order of AA within the sequence, we used one-hot-encoding: there are 20 different AA, so each AA in the peptide is encoded to a vector of 20, and overall peptides of 23 AA encoded to a vector of 460.
-To our great surprise, with the simple MLP, we hit 91% accuracy *this is mainMLP.py*!
+To our great surprise, with the simple MLP, we hit 91% accuracy *this is mainMLP.py*.
 At first, we suspected the results are too good to be true.
 Indeed, we noticed our data contains peptides that are very similar to one another, and some even identical (turned out the research got two different results for the same peptides, it happens). We filtered the data using cd-hit from peptides with 85% or more identical AAs.
 The results remained the same, so we reduced it to 75%, and even 40%, with no significant change. We also tried using random half of the data (the remaining data after 40% filtering was about half of the original) and got similar results.
