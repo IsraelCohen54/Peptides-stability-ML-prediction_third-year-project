@@ -1,3 +1,24 @@
+# Explanation:
+
+# Train: part the data to 0.8, sum each AA types of the stable peptides, and divide each summed AA by the overall stable AA.
+#   That is the probability of any AA being in a stable peptide.
+#   Same for the not stable peptides to calculate the probability of AA being in not stable peptides.
+# Test: Using the 0.2 peptides left from before,
+#   and getting the "prior probability" if a peptide is stable or not by multiplying with the stable\not stable probabilities.
+ 
+# To do the last part, calculating the "prior probability",
+#   let's say that the number of stable sequences that had exactly 8 appearances of specific AA is 9,
+#   while 1 sequence that wasn't stable and had exact 8 appearances of the same specific AA,
+#   so per that AA, the probability to be with her (at that 8 counts!) and be stable is 0.9 (and not stable - 0.1)
+# As peptide has 19 more AA types, we do the same per each AA, and then do an average of the calculated stable and the not stable probability of the AAs,
+#   by summing the probability of its AAs. 
+#   (in accordance with the number of appearance of any AA in the current peptide, the specific probability per AA would change
+#   - AA probability to be stable at 8 times in peptide isn't the same of 7 times etcetera).
+# The 2 results are our prior probability per stable or not stable specific peptide. (stable\not stable calculated with their own AAs probabilities S\not S AAs...)
+
+# Then, check which probability is higher (stable\not) to the looked upon peptide, and the higher probability wins.
+# Then, check the real stability if I got a correct prediction, and show the results.
+
 import numpy as np
 from sklearn.utils import shuffle
 from torch.utils.data import Subset
@@ -39,6 +60,10 @@ def fill_arrays_data(sequence, the_label):
     fourteen_AA = np.ones(40)
     fifteen_AA = np.ones(40)
 
+    #~~~ *** ~~~~~~ *** ~~~~~~ *** ~~~~~~ *** ~~~~~~ *** ~~~~~~ *** ~~~~~~ *** ~~~~~~ *** ~~~~~~ *** ~~~~~~ *** ~~~#
+    #(I should have used a switch case to shorten the code by like 150 lines, I didn't get to do it during studies).
+    #~~~ *** ~~~~~~ *** ~~~~~~ *** ~~~~~~ *** ~~~~~~ *** ~~~~~~ *** ~~~~~~ *** ~~~~~~ *** ~~~~~~ *** ~~~~~~ *** ~~~#
+    
     for index, one_seq in enumerate(sequence):
         if the_label[index] == 1:
             for sub_seq_ind, letter in enumerate(one_seq):
@@ -205,14 +230,14 @@ if __name__ == "__main__":
     seqs, labels, stability = makeInputData()
     seqs, labels = myEncodeDense(seqs, labels)
 
-    # chenge back to np.array:
+    # change back to np.array:
     labels = torch.Tensor.numpy(labels)
     seqs = torch.Tensor.numpy(seqs)
 
     # shuffle
     seqs, labels = shuffle_data(seqs, labels)
 
-    # Make training data by 0.8 of the data:
+    # Create training data with 0.8 of the data:
     len_label = len(labels)
     len_seqs = len(seqs)
 
@@ -259,7 +284,7 @@ if __name__ == "__main__":
 
     # Check numbers of time of which specific num of specific AA was at stab seq (non stab start at ind 20+). Max for 1 AA in seq is 15, so 15 np.array:
     # Each array hold num stab per AA overall per num, from 0 - 15.
-    # Arrays started with ones to jump over zero problems.
+    # Arrays started with ones to jump over 'zero' problems.
     one,two,three,four,five,sis,seven,eight,nine,ten,eleven,twelve,thirteen,fourteen,fifteen = \
         fill_arrays_data(train_seqs, train_labels)
 
