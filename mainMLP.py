@@ -170,7 +170,7 @@ def train(samples, labels, model, optimizer):
     for sample, label in zip(samples, labels):
         optimizer.zero_grad()
         output = model(sample)
-        t_loss = F.nll_loss(output, label.long().view(1))
+        t_loss = F.nll_loss(output, label.long().view(1)) #nll_loss: The negative log likelihood loss. It is useful to train a classification problem with C classes. If provided, the optional argument weight should be a 1D Tensor assigning weight to each of the classes. This is particularly useful when you have an unbalanced training set which is our case, as we dont have a balanced number of stabe/unstable IMO using "same" AAs for both to learn...
         t_loss.backward()
         optimizer.step()
 
