@@ -1,5 +1,5 @@
 # Third-year project
-Made with Chananel Hadad (another student) and supervised by prof. Ron Unger.
+Made with Hananel Hadad (another student) and supervised by prof. Ron Unger.
 
 Background:
 Dr. Itay Koren from Bar-Ilan has conducted biological research and made data of 22,000 peptides - all 23-amino-acid-long, and a regressive stability score in range (0,6).
