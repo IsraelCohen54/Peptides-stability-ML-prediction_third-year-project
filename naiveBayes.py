@@ -1,5 +1,4 @@
-# Explanation:
-
+#Explanation:
 # Train: part the data to 0.8, sum each AA types of the stable peptides, and divide each summed AA by the overall stable AA.
 #   That is the probability of any AA being in a stable peptide.
 #   Same for the not stable peptides to calculate the probability of AA being in not stable peptides.
