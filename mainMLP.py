@@ -364,15 +364,14 @@ def collectMeasurements():
     v_precision[curFold].append(curPrecision)
     v_recall[curFold].append(curRecall)
 
-
 if __name__ == "__main__":
-    samples, labels, stability = makeInputData()
-    # lists to hold train results
-    t_auc = [[] for i in range(folds)]  # auc[i][j] is the auc on fold i at epoch j
-    t_accuracy = [[] for i in range(folds)]
-    t_f1Score = [[] for i in range(folds)]
-    t_precision = [[] for i in range(folds)]
-    t_recall = [[] for i in range(folds)]
+    samples, labels, stability = makeInputData() # read the excel and return (after shuffling) np.array of AAs sequences (seqs_margins_shuffled), and stability labels (0 non stable quarter, 1 stable quarter), original stability grade.
+    # lists to hold train results. Next line explanation: auc[i][j] is the auc on fold i at epoch j. 
+    t_auc = [[] for i in range(folds)]      #AUC(Area under the ROC Curve): AUC provides an aggregate measure of performance across all possible classification thresholds}
+    t_accuracy = [[] for i in range(folds)] #accuracy: correct predictions
+    t_f1Score = [[] for i in range(folds)]  #f1score: the harmonic mean between precision and recall. It is used as a statistical measure to rate performance
+    t_precision = [[] for i in range(folds)]#precision: number of true positives (said thing correctly) divided by the total number of positive predictions (say things is X overall without checking if it's correct or not)
+    t_recall = [[] for i in range(folds)]   #recall: the ratio between the numbers of Positive samples correctly classified as Positive, to the total number of Positive samples. The recall measures the model's ability to detect positive samples. The higher the recall, the more positive samples detected.
     # list to hold validation results
     v_auc = [[] for i in range(folds)]  # auc[i][j] is the auc on fold i at epoch j
     v_accuracy = [[] for i in range(folds)]
@@ -388,7 +387,7 @@ if __name__ == "__main__":
     scores1 = []
     originalStability = []
 
-    # run kfold
+    # run kfold cross validation (meaning, if the data is small, we can part it to E.G. 3 folds, to train 3 times over 2 other part and test the third one, then sum overall results. 
     cv = KFold(n_splits=folds, random_state=777, shuffle=True)
     curFold = -1
     for train_index, test_index in cv.split(samples):
@@ -404,10 +403,10 @@ if __name__ == "__main__":
         # prepare new model
         # modely = ourModel(vec_size=23 * 20)
         modely = ourModelDense(vec_size=20)
-        optimizery = optim.Adam(modely.parameters(), lr=lr)
+        optimizery = optim.Adam(modely.parameters(), lr=lr) #Adam optimizer results are generally better, faster and require fewer parameters for tuning, than every other optimization algorithms. optimizer - learning way of the nn weights.
         # do epochs - train and collect train and validation measurements
         for epoch in range(epochs):
-            collectMeasurements()
+            collectMeasurements() #applying data to current nn learned weights and saving results to the lists before...
             train(train_x, train_y, modely, optimizery)
         # at the end of fold, do test. also save original stability of tested peptides for comparison
         test()
