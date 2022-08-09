@@ -3,7 +3,7 @@ Made with Hananel Hadad (another student) and supervised by prof. Ron Unger.
 
 Background:
 Dr. Itay Koren from Bar-Ilan has conducted biological research and made data of 22,000 peptides - all 23-amino-acid-long, and a regressive stability score in range (0,6).
-He published his results here https://www.cell.com/cell/pdf/S0092-8674(18)30521-X.pdf
+He published his results here: https://www.cell.com/cell/pdf/S0092-8674(18)30521-X.pdf
 Based on this data, our project was constructing a machine that would learn to anticipate the stability score of peptides.
 
 Getting started:
