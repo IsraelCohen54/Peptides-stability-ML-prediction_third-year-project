@@ -24,7 +24,7 @@ At this point, we had a meeting with Dr. Itay who surprised us by agreeing that 
 To make sure this is true, we tried ignoring the order by using bag-of-words encoding: each peptide was encoded to a vector of 20, where vector[i] is how many times AA[i] exists in the peptide.
 The results were better than before (94% accuracy)!
 After that, we wanted to see how simpler models will do.
-We tried Naive Bayes (90% accuracy) and Logistic Regression (95% accuracy!).
+We tried Naive Bayes (95% accuracy at best run!) and Logistic Regression (95% accuracy!).
 *These are naiveBayes.py and logisticRegression.py*
 
 Regression:
