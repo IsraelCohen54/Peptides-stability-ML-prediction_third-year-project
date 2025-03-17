@@ -1,4 +1,4 @@
-# Third-year project
+# Peptides stability prediction with Machine learning, third-year project
 Made with Hananel Hadad (another student) and supervised by prof. Ron Unger.
 
 Background:
